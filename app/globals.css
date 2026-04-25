@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f9f9f9;
+  --foreground: #1a1a1b;
+  --surface: #ffffff;
+  --surface-muted: #f2f2f4;
+  --charcoal: #1a1a1b;
+  --pink: #ff1b6b;
+  --orange: #ff8c37;
+  --gold: #d4af37;
+  --pearl: #f9f9f9;
+  --muted: #6d6d74;
+  --border: rgba(26, 26, 27, 0.1);
+  --font-heading: "Aptos Display", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-body: "Aptos", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-charcoal: var(--charcoal);
+  --color-pink: var(--pink);
+  --color-orange: var(--orange);
+  --color-gold: var(--gold);
+  --color-pearl: var(--pearl);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  background-image:
+    radial-gradient(circle at top left, rgba(255, 27, 107, 0.1), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(255, 140, 55, 0.12), transparent 26%);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(255, 27, 107, 0.16);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+/* --- Utility Classes --- */
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Animations --- */
+
+/* Announcement Marquee */
+.announcement-marquee {
+  animation: announcement-marquee 22s linear infinite;
+}
+
+.announcement-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Parallax Marquee */
+.parallax-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: parallax-marquee-loop var(--marquee-duration, 28s) linear infinite;
+  will-change: transform;
+}
+
+.parallax-marquee-track--reverse {
+  animation-direction: reverse;
+}
+
+/* Slide Up Animation (New) */
+.animate-slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Keyframes */
+@keyframes announcement-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes parallax-marquee-loop {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .announcement-marquee,
+  .parallax-marquee-track,
+  .parallax-marquee-track--reverse,
+  .animate-slide-up {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
